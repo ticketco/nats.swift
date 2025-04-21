@@ -16,9 +16,10 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/apple/swift-nio.git", from: "2.0.0"),
         .package(url: "https://github.com/apple/swift-log.git", from: "1.4.2"),
-        .package(url: "https://github.com/nats-io/nkeys.swift.git", from: "0.1.2"),
         .package(url: "https://github.com/apple/swift-nio-ssl.git", from: "2.0.0"),
-        .package(url: "https://github.com/Jarema/swift-nuid.git", from: "0.2.0"),
+        .package(url: "https://github.com/apple/swift-crypto.git", from: "2.0.0"),
+        .package(url: "https://github.com/ticketco/swift-nuid.git", branch: "main"),
+        .package(url: "https://github.com/ticketco/nkeys.swift.git", branch: "main")
     ],
     targets: [
         .target(
@@ -32,6 +33,7 @@ let package = Package(
                 .product(name: "NIOWebSocket", package: "swift-nio"),
                 .product(name: "NKeys", package: "nkeys.swift"),
                 .product(name: "Nuid", package: "swift-nuid"),
+                .product(name: "Crypto", package: "swift-crypto", condition: .when(platforms: [.linux]))
             ]),
         .target(
             name: "JetStream",
